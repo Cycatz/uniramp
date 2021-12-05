@@ -1,2 +1,11 @@
+"""
+The init file for the package.
+"""
 
-from ._uniramp import Typeface
+
+__all__ = [
+    'main'
+]
+
+
+from ._core import main
