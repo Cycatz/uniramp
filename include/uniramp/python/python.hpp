@@ -21,7 +21,7 @@ namespace python
         py::class_<Typeface>(mod, "Typeface")
             .def(py::init<const std::string &>())
             .def("num_glyph", &Typeface::num_glyph)
-            .def("load_glyph", &Typeface::load_glyph);
+            .def("get_coverage", &Typeface::get_coverage);
     }
 
 } /* end namespace python */

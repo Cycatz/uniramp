@@ -18,11 +18,11 @@ public:
     Typeface(const std::string &font_path);
     ~Typeface();
     FT_Long num_glyph() { return face->num_glyphs; }
-    double load_glyph(FT_ULong charcode);
+    double get_coverage(FT_ULong charcode);
 
 private:
     void print_glyph_metrics(FT_Glyph_Metrics *metrics);
-    double calculate_ratio(FT_Bitmap *bitmap, int max_size);
+    double calculate_coverage(FT_Bitmap *bitmap, int max_size);
     FT_Library library; 
     FT_Face face;
 

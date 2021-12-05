@@ -30,7 +30,7 @@ Typeface::Typeface(const std::string &font_path) : char_pixel_size(32)
     }
 }
 
-double Typeface::calculate_ratio(FT_Bitmap *bitmap, int max_size)
+double Typeface::calculate_coverage(FT_Bitmap *bitmap, int max_size)
 {
 
     FT_Int i, sum = 0;
@@ -45,7 +45,7 @@ double Typeface::calculate_ratio(FT_Bitmap *bitmap, int max_size)
     return sum / (double) (max_size * gray_level);
 }
 
-double Typeface::load_glyph(FT_ULong charcode)
+double Typeface::get_coverage(FT_ULong charcode)
 {
     FT_Error error;
     FT_UInt glyph_index;
@@ -81,7 +81,7 @@ double Typeface::load_glyph(FT_ULong charcode)
         assert(height == ((face->ascender - face->descender) * char_pixel_size / face->units_per_EM));
     }
 
-    return calculate_ratio(&face->glyph->bitmap, width * height);
+    return calculate_coverage(&face->glyph->bitmap, width * height);
 }
 Typeface::~Typeface()
 {

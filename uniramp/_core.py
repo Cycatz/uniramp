@@ -12,7 +12,7 @@ def print_ramp(font, character_set):
     tf = Typeface(str(font))
     if character_set is None or len(character_set) == 0:  
         character_set = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    ramp = sorted([(c, tf.load_glyph(ord(c))) for c in character_set], key=lambda x: x[1], reverse=True)
+    ramp = sorted([(c, tf.get_coverage(ord(c))) for c in character_set], key=lambda x: x[1], reverse=True)
 
     print('Ramp: ' + ''.join([c[0] for c in ramp]))
 
