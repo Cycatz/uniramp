@@ -45,7 +45,7 @@ double Typeface::calculate_ratio(FT_Bitmap *bitmap, int max_size)
     return sum / (double) (max_size * gray_level);
 }
 
-void Typeface::load_glyph(FT_ULong charcode)
+double Typeface::load_glyph(FT_ULong charcode)
 {
     FT_Error error;
     FT_UInt glyph_index;
@@ -81,7 +81,7 @@ void Typeface::load_glyph(FT_ULong charcode)
         assert(height == ((face->ascender - face->descender) * char_pixel_size / face->units_per_EM));
     }
 
-    std::cout << "Ratio: " << calculate_ratio(&face->glyph->bitmap, width * height) << std::endl;
+    return calculate_ratio(&face->glyph->bitmap, width * height);
 }
 Typeface::~Typeface()
 {

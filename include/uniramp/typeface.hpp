@@ -18,7 +18,7 @@ public:
     Typeface(const std::string &font_path);
     ~Typeface();
     FT_Long num_glyph() { return face->num_glyphs; }
-    void load_glyph(FT_ULong charcode);
+    double load_glyph(FT_ULong charcode);
 
 private:
     void print_glyph_metrics(FT_Glyph_Metrics *metrics);
