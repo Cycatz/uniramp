@@ -11,7 +11,8 @@
 #include FT_FREETYPE_H
 
 
-namespace uniramp {
+namespace uniramp
+{
 class Typeface
 {
 public:
@@ -23,11 +24,10 @@ public:
 private:
     void print_glyph_metrics(FT_Glyph_Metrics *metrics);
     double calculate_coverage(FT_Bitmap *bitmap, int max_size);
-    FT_Library library; 
+    FT_Library library;
     FT_Face face;
 
 
-    FT_Int char_pixel_size; 
+    FT_Int char_pixel_size;
 };
 } /* end namespace uniramp */
-
