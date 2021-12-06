@@ -97,9 +97,15 @@ cmake: $(BUILD_PATH)/Makefile
 .PHONY: buildext
 buildext: $(UNIRAMP_ROOT)/uniramp/_uniramp$(pyextsuffix)
 
+.PHONY: format
+format: $(UNIRAMP_ROOT)/uniramp/clang-format
+
 .PHONY: install
 install: cmake
 	make -C $(BUILD_PATH) VERBOSE=$(VERBOSE) install
+
+$(UNIRAMP_ROOT)/uniramp/clang-format: $(BUILD_PATH)/Makefile
+	make -C $(BUILD_PATH) VERBOSE=$(VERBOSE) clang-format
 
 $(UNIRAMP_ROOT)/uniramp/_uniramp$(pyextsuffix): $(BUILD_PATH)/Makefile
 	make -C $(BUILD_PATH) VERBOSE=$(VERBOSE) _uniramp_py

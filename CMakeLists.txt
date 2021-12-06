@@ -37,7 +37,41 @@ project(
   LANGUAGES CXX
 )
 
+#
+# Set up cmake module path
+#
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
+
+
+#
+# Set up project settings
+#
+
+include(cmake/StandardSettings.cmake)    
+
+
+
+#
+# Set up project utils 
+# 
+
+include(cmake/Utils.cmake)
+
+
+#
+# Setup alternative names
+#
+
+if(${PROJECT_NAME}_USE_ALT_NAMES)
+  string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWERCASE)
+  string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPERCASE)
+else()
+  set(PROJECT_NAME_LOWERCASE ${PROJECT_NAME})
+  set(PROJECT_NAME_UPPERCASE ${PROJECT_NAME})
+endif()
+
+
 
 if(NOT SKIP_PYTHON_EXECUTABLE)
     find_program(PYTHON_EXECUTABLE python3)
@@ -145,6 +179,10 @@ target_compile_options(
     -Wno-noexcept-type # GCC
 )
 
+#
+# Set up clang-tidy 
+#
+
 if(CLANG_TIDY_EXE AND USE_CLANG_TIDY)
     set_target_properties(
         _uniramp PROPERTIES
@@ -152,6 +190,13 @@ if(CLANG_TIDY_EXE AND USE_CLANG_TIDY)
     )
 endif()
 
+#
+# Format the project using the `clang-format` target (i.e: cmake --build build --target clang-format)
+#
+
+add_clang_format_target() 
+
+    
 set(UNIRAMP_PY_PATH "${PROJECT_SOURCE_DIR}/uniramp")
 
 execute_process(
