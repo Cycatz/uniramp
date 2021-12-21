@@ -19,7 +19,8 @@ void initialize(pybind11::module &mod)
 {
     namespace py = pybind11;
     py::class_<Typeface>(mod, "Typeface")
-        .def(py::init<const std::string &>())
+        .def(py::init<const std::string &, signed long>(), py::arg("font_path"),
+             py::arg("face_index") = 0)
         .def("num_glyph", &Typeface::num_glyph)
         .def("get_pixel_size", &Typeface::get_pixel_size)
         .def("set_pixel_size", &Typeface::set_pixel_size)

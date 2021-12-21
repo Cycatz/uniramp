@@ -16,7 +16,7 @@ namespace uniramp
 class Typeface
 {
 public:
-    Typeface(const std::string &font_path);
+    Typeface(const std::string &font_path, FT_Long face_index);
     ~Typeface();
 
     FT_Long num_glyph() { return m_face->num_glyphs; }

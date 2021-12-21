@@ -14,7 +14,8 @@ namespace uniramp
 
 
 
-Typeface::Typeface(const std::string &font_path) : m_char_pixel_size(32)
+Typeface::Typeface(const std::string &font_path, FT_Long face_index = 0)
+    : m_library(nullptr), m_face(nullptr), m_char_pixel_size(32)
 {
     FT_Error error;
 
@@ -23,7 +24,19 @@ Typeface::Typeface(const std::string &font_path) : m_char_pixel_size(32)
         throw std::runtime_error("Error initializing the font library");
     }
 
-    error = FT_New_Face(m_library, font_path.data(), 0, &m_face);
+    error = FT_New_Face(m_library, font_path.data(), -1, &m_face);
+    if (error == FT_Err_Unknown_File_Format) {
+        throw std::runtime_error("Unknown font file format");
+    } else if (error) {
+        throw std::runtime_error("Unknown error");
+    }
+
+    if (face_index < 0 || face_index >= m_face->num_faces) {
+        throw std::invalid_argument("face index must between 0 ~ " +
+                                    std::to_string(m_face->num_faces - 1));
+    }
+
+    error = FT_New_Face(m_library, font_path.data(), face_index, &m_face);
     if (error == FT_Err_Unknown_File_Format) {
         throw std::runtime_error("Unknown font file format");
     } else if (error) {
