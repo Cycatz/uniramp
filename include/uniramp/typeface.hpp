@@ -22,6 +22,10 @@ public:
     FT_Long num_glyph() { return m_face->num_glyphs; }
     FT_Int get_pixel_size() { return m_char_pixel_size; }
     void set_pixel_size(FT_Int pixel_size) { m_char_pixel_size = pixel_size; }
+
+    std::string get_family_name() { return std::string(m_face->family_name); }
+    std::string get_style_name() { return std::string(m_face->style_name); }
+
     double get_coverage(FT_ULong charcode);
 
 private:

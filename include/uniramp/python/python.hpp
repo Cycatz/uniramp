@@ -24,6 +24,8 @@ void initialize(pybind11::module &mod)
         .def("num_glyph", &Typeface::num_glyph)
         .def("get_pixel_size", &Typeface::get_pixel_size)
         .def("set_pixel_size", &Typeface::set_pixel_size)
+        .def("get_family_name", &Typeface::get_family_name)
+        .def("get_style_name", &Typeface::get_style_name)
         .def("get_coverage", &Typeface::get_coverage);
 }
 
