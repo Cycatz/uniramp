@@ -21,6 +21,8 @@ void initialize(pybind11::module &mod)
     py::class_<Typeface>(mod, "Typeface")
         .def(py::init<const std::string &>())
         .def("num_glyph", &Typeface::num_glyph)
+        .def("get_pixel_size", &Typeface::get_pixel_size)
+        .def("set_pixel_size", &Typeface::set_pixel_size)
         .def("get_coverage", &Typeface::get_coverage);
 }
 
