@@ -57,8 +57,12 @@ double Typeface::get_coverage(FT_ULong charcode)
     }
 
     glyph_index = FT_Get_Char_Index(face, charcode);
-    error = FT_Load_Glyph(face, glyph_index, FT_LOAD_DEFAULT);
+    if (glyph_index == 0) {
+        throw std::runtime_error("Charcode " + std::to_string(charcode) +
+                                 " not found");
+    }
 
+    error = FT_Load_Glyph(face, glyph_index, FT_LOAD_DEFAULT);
     if (error) {
         throw std::runtime_error("Unknown error");
     }
