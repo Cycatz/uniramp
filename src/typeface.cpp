@@ -14,16 +14,16 @@ namespace uniramp
 
 
 
-Typeface::Typeface(const std::string &font_path) : char_pixel_size(32)
+Typeface::Typeface(const std::string &font_path) : m_char_pixel_size(32)
 {
     FT_Error error;
 
-    error = FT_Init_FreeType(&library);
+    error = FT_Init_FreeType(&m_library);
     if (error) {
         throw std::runtime_error("Error initializing the font library");
     }
 
-    error = FT_New_Face(library, font_path.data(), 0, &face);
+    error = FT_New_Face(m_library, font_path.data(), 0, &m_face);
     if (error == FT_Err_Unknown_File_Format) {
         throw std::runtime_error("Unknown font file format");
     } else if (error) {
@@ -51,23 +51,23 @@ double Typeface::get_coverage(FT_ULong charcode)
     FT_UInt glyph_index;
 
     /* Set character pixel sizes, default is 1em x 1em = 32 x 32 pixels */
-    error = FT_Set_Pixel_Sizes(face, 0, char_pixel_size);
+    error = FT_Set_Pixel_Sizes(m_face, 0, m_char_pixel_size);
     if (error) {
         throw std::runtime_error("Unknown error");
     }
 
-    glyph_index = FT_Get_Char_Index(face, charcode);
+    glyph_index = FT_Get_Char_Index(m_face, charcode);
     if (glyph_index == 0) {
         throw std::runtime_error("Charcode " + std::to_string(charcode) +
                                  " not found");
     }
 
-    error = FT_Load_Glyph(face, glyph_index, FT_LOAD_DEFAULT);
+    error = FT_Load_Glyph(m_face, glyph_index, FT_LOAD_DEFAULT);
     if (error) {
         throw std::runtime_error("Unknown error");
     }
 
-    error = FT_Render_Glyph(face->glyph,            /* glyph slot  */
+    error = FT_Render_Glyph(m_face->glyph,          /* glyph slot  */
                             FT_RENDER_MODE_NORMAL); /* render mode */
     if (error) {
         throw std::runtime_error("Unknown error");
@@ -75,24 +75,24 @@ double Typeface::get_coverage(FT_ULong charcode)
 
     /* The values are expressed in 26.6 fractional pixel format, which means 1
      * unit = 1/64 pixel */
-    FT_Pos width = (face->glyph->metrics.horiAdvance) >> 6;
-    FT_Pos height = (face->glyph->metrics.vertAdvance) >> 6;
+    FT_Pos width = (m_face->glyph->metrics.horiAdvance) >> 6;
+    FT_Pos height = (m_face->glyph->metrics.vertAdvance) >> 6;
 
     /* Not all fonts do contain vertical metrics */
     if (height == 0) {
         /* Use global metrics to calculate the height */
-        height = (face->ascender - face->descender) * char_pixel_size /
-                 face->units_per_EM;
+        height = (m_face->ascender - m_face->descender) * m_char_pixel_size /
+                 m_face->units_per_EM;
     } else {
-        assert(height == ((face->ascender - face->descender) * char_pixel_size /
-                          face->units_per_EM));
+        assert(height == ((m_face->ascender - m_face->descender) *
+                          m_char_pixel_size / m_face->units_per_EM));
     }
 
-    return calculate_coverage(&face->glyph->bitmap, width * height);
+    return calculate_coverage(&m_face->glyph->bitmap, width * height);
 }
 Typeface::~Typeface()
 {
-    FT_Done_Face(face);
-    FT_Done_FreeType(library);
+    FT_Done_Face(m_face);
+    FT_Done_FreeType(m_library);
 }
 } /* end namespace uniramp */
