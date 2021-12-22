@@ -54,7 +54,9 @@ def convert(image, ramp, new_width=200):
     return '\n'.join(new_image)
 
 
-def img2text(path, ramp):
+def img2text(path, ramp, reverse: bool):
+    if reverse:  
+        ramp = ramp[::-1]
     with Image.open(path) as image:
         new_image = convert(image, ramp)
         print(new_image)

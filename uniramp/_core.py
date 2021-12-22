@@ -2,7 +2,8 @@ import argparse
 import pathlib
 
 from .img2text import img2text
-from .ramp import Ramp
+from .ramp import show_ramp
+from .coverage import Coverage
 
 
 __all__ = [
@@ -28,6 +29,7 @@ def init_args():
                             help='specify the font file')
     parser_image.add_argument('-c', '--character-set', type=str,
                         help='specify the character set (default is [a-z][A-Z])')
+    parser_image.add_argument('-r', '--reverse', action="store_true", help='reverse the ramp order')
     # parser_image.set_defaults(func=self.image)
 
     args = parser.parse_args()
@@ -35,11 +37,12 @@ def init_args():
 
 def main():
     args = init_args()
-    r = Ramp(args)
+    cov = Coverage(args)
+    c = cov.get_coverage()
+
     if args.cmd == 'ramp':
-        r.show_ramp()
+        show_ramp(c, args.graph)
     elif args.cmd == 'image':
-        ramp = r.get_ramp()
-        img2text(str(args.image), ramp[::-1])
+        img2text(str(args.image), c[::-1], args.reverse)
     else:
         pass
