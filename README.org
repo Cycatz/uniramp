@@ -1,6 +1,7 @@
 * Uniramp 
+** Ramp 
+#+html:   <img src="assets/example_cjk_ramp.png" alt="example_cjk_ramp.png" />
 
-** Screenshot 
-#+html:   <img src="assets/example_Inconsolata.png" alt="example_Inconsolata.png" />
-
-#+html:   <img src="assets/example_cjk.png" alt="example_cjk.png" />
+** Image to Text
+#+html:   <img src="assets/octocat.png" alt="octocat.png" />
+#+html:   <img src="assets/example_cjk_octocat.png" alt="example_cjk_octocat.png" />
