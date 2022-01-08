@@ -1,6 +1,19 @@
 import uniramp
+import math
 
-def test_loadfont():
+
+def is_equal(x: float, y: float, eps=1e-3):
+    return math.isclose(x, y, abs_tol=eps)
+
+
+def test_coverage_ascii():
     t = uniramp._uniramp.Typeface("tests/NotoSansCJK-Regular.ttc")
-    assert t.get_family_name() == "Noto Sans CJK JP"
-    assert t.get_style_name() == "Regular"
+
+    assert is_equal(t.get_coverage(ord('a')), 0.199)
+    assert is_equal(t.get_coverage(ord('b')), 0.237)
+
+def test_coverage_CJK():
+    t = uniramp._uniramp.Typeface("tests/NotoSansCJK-Regular.ttc")
+
+    assert is_equal(t.get_coverage(ord('一')), 0.074)
+    assert is_equal(t.get_coverage(ord('二')), 0.132)
