@@ -100,6 +100,8 @@ else()
     message(STATUS "not use clang-tidy")
 endif()
 
+include(cmake/Flake8.cmake)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -209,3 +211,6 @@ add_custom_target(_uniramp_py
 
 message(STATUS "CMAKE_INSTALL_INCLUDEDIR: ${CMAKE_INSTALL_INCLUDEDIR}")
 install(DIRECTORY ${UNIRAMP_INCLUDE_DIR}/uniramp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+add_custom_target(flake8)
+flake8("flake8")
