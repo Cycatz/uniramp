@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+# Copyright (c) 2021, Cycatz <cycatz@staque.xyz>
 # Copyright (C) 2018 Yung-Yu Chen <yyc@solvcon.net>.
 #
 # All rights reserved.
@@ -74,54 +74,8 @@ pybind11() {
 
 }
 
-xtl() {
-
-  cmakeargs=("-DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX}")
-  cmakeargs+=("-DCMAKE_BUILD_TYPE=Release")
-  install ${XTL_ORG:-xtensor-stack} xtl ${XTL_BRANCH:-0.6.9} \
-    ${XTL_LOCAL:-xtl-0.6.9} "${cmakeargs[@]}"
-
-}
-
-xsimd() {
-
-  cmakeargs=("-DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX}")
-  cmakeargs+=("-DCMAKE_BUILD_TYPE=Release")
-  cmakeargs+=("-DBUILD_TESTS=OFF")
-  install ${XSIMD_ORG:-xtensor-stack} xsimd ${XSIMD_BRANCH:-7.4.4} \
-    ${XSIMD_LOCAL:-xsimd-7.4.4} "${cmakeargs[@]}"
-
-}
-
-xtensor() {
-
-  cmakeargs=("-DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX}")
-  cmakeargs+=("-DCMAKE_BUILD_TYPE=Release")
-  install ${XTENSOR_ORG:-xtensor-stack} xtensor ${XTENSOR_BRANCH:-0.21.2} \
-    ${XTENSOR_LOCAL:-xtensor-0.21.2} "${cmakeargs[@]}"
-
-}
-
-xtensor_python() {
-
-  cmakeargs=("-DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX}")
-  cmakeargs+=("-DCMAKE_BUILD_TYPE=Release")
-  install ${XTENSOR_PYTHON_ORG:-xtensor-stack} xtensor-python \
-    ${XTENSOR_PYTHON_BRANCH:-0.24.1} \
-    ${XTENSOR_PYTHON_LOCAL:-xtensor-python-0.24.1} "${cmakeargs[@]}"
-
-}
-
 if [ $1 == "pybind11" ]; then
   pybind11
-elif [ $1 == "xtl" ]; then
-  xtl
-elif [ $1 == "xsimd" ]; then
-  xsimd
-elif [ $1 == "xtensor" ]; then
-  xtensor
-elif [ $1 == "xtensor-python" ]; then
-  xtensor_python
 elif [ $1 == "everything" ]; then
   pybind11
 fi
