@@ -1,19 +1,26 @@
-from termgraph import termgraph as tg
+__all__ = [
+    'show_ramp'
+]
 
+def get_bar(ratio: float, width: int) -> str:
+    BLOCK_CHARS = ['▏', '▎', '▍', '▌', '▋', '▊', '▉', '█']
 
-def show_ramp(coverage, print_graph: bool):
+    num_whole_char = int(ratio * width)
+    remainder_width = ratio * width - num_whole_char
+    partial_char_index = int(remainder_width * len(BLOCK_CHARS))
+
+    bar = BLOCK_CHARS[-1] * num_whole_char
+    if num_whole_char < width:
+        bar += BLOCK_CHARS[partial_char_index]
+
+    return bar
+
+ 
+def show_ramp(coverage, print_graph: bool, width: int):
     if not print_graph:
         print(''.join([c[0] for c in coverage]))
     else:
-        labels = [c[0] for c in coverage]
-        data = [[c[1]] for c in coverage]
-
-        args = {'filename': '-', 'title': None, 'width': 50,
-                'format': '{:<.0f}', 'suffix': '', 'no_labels': False, 'no_values': False,
-                'color': None, 'vertical': False, 'stacked': False, 'histogram': False,
-                'different_scale': False, 'calendar': False,
-                'start_dt': None, 'custom_tick': '', 'delim': '',
-                'verbose': False, 'version': False}
-        tg.chart([], data, args, labels)
-
-
+        if width is None or width <= 0:
+            width = 160
+        for label, ratio in coverage:
+            print('{}: {} {:.4f}'.format(label, get_bar(ratio, width), ratio))
