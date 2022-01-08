@@ -43,7 +43,7 @@ def init_args():
 
 def main():
     args = init_args()
-    cov = Coverage(args)
+    cov = Coverage(args.font, args.character_set)
     c = cov.get_coverage()
 
     if args.cmd == 'ramp':
