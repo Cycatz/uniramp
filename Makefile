@@ -91,6 +91,10 @@ pytest: $(UNIRAMP_ROOT)/uniramp/_uniramp$(pyextsuffix)
 flake8:
 	make -C $(BUILD_PATH) VERBOSE=$(VERBOSE) flake8
 
+.PHONY: black
+black:
+	make -C $(BUILD_PATH) VERBOSE=$(VERBOSE) black 
+
 .PHONY: cmake
 cmake: $(BUILD_PATH)/Makefile
 

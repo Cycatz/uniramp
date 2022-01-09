@@ -101,6 +101,7 @@ else()
 endif()
 
 include(cmake/Flake8.cmake)
+include(cmake/Black.cmake)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -214,3 +215,7 @@ install(DIRECTORY ${UNIRAMP_INCLUDE_DIR}/uniramp DESTINATION ${CMAKE_INSTALL_INC
 
 add_custom_target(flake8)
 flake8("flake8")
+
+
+add_custom_target(black)
+black("black")
