@@ -1,9 +1,8 @@
-__all__ = [
-    'show_ramp'
-]
+__all__ = ["show_ramp"]
+
 
 def get_bar(ratio: float, width: int) -> str:
-    BLOCK_CHARS = ['▏', '▎', '▍', '▌', '▋', '▊', '▉', '█']
+    BLOCK_CHARS = ["▏", "▎", "▍", "▌", "▋", "▊", "▉", "█"]
 
     num_whole_char = int(ratio * width)
     remainder_width = ratio * width - num_whole_char
@@ -15,12 +14,12 @@ def get_bar(ratio: float, width: int) -> str:
 
     return bar
 
- 
+
 def show_ramp(coverage, print_graph: bool, width: int):
     if not print_graph:
-        print(''.join([c[0] for c in coverage]))
+        print("".join([c[0] for c in coverage]))
     else:
         if width is None or width <= 0:
             width = 160
         for label, ratio in coverage:
-            print('{}: {} {:.4f}'.format(label, get_bar(ratio, width), ratio))
+            print("{}: {} {:.4f}".format(label, get_bar(ratio, width), ratio))

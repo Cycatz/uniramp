@@ -1,9 +1,9 @@
 # Copyright (c) 2020, Yung-Yu Chen <yyc@solvcon.net>
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-# 
+#
 # - Redistributions of source code must retain the above copyright notice, this
 #   list of conditions and the following disclaimer.
 # - Redistributions in binary form must reproduce the above copyright notice,
@@ -12,7 +12,7 @@
 # - Neither the name of the copyright holder nor the names of its contributors
 #   may be used to endorse or promote products derived from this software without
 #   specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -40,15 +40,15 @@ class CMakeExtension(Extension):
 class cmake_build_ext(build_ext):
 
     user_options = build_ext.user_options + [
-        ('cmake-args=', None, 'arguments to cmake'),
-        ('make-args=', None, 'arguments to make'),
+        ("cmake-args=", None, "arguments to cmake"),
+        ("make-args=", None, "arguments to make"),
     ]
 
     def initialize_options(self):
 
         super().initialize_options()
-        self.cmake_args = ''
-        self.make_args = ''
+        self.cmake_args = ""
+        self.make_args = ""
 
     def finalize_options(self):
 
@@ -68,19 +68,22 @@ class cmake_build_ext(build_ext):
         extdir = pathlib.Path(self.get_ext_fullpath(ext.name)).parent
         extdir.mkdir(parents=True, exist_ok=True)
 
-        local_cmake_args = '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={}'.format(
-            str(extdir.absolute()))
+        local_cmake_args = "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={}".format(
+            str(extdir.absolute())
+        )
 
         subprocess.run(
-            'cmake {} {} {}'.format(cwd, local_cmake_args, self.cmake_args),
+            "cmake {} {} {}".format(cwd, local_cmake_args, self.cmake_args),
             shell=True,
-            cwd=str(build_temp))
+            cwd=str(build_temp),
+        )
 
-        target_name = ext.name.split('.')[-1]
+        target_name = ext.name.split(".")[-1]
         subprocess.run(
-            'make {} {}'.format(target_name, self.make_args),
+            "make {} {}".format(target_name, self.make_args),
             shell=True,
-            cwd=str(build_temp))
+            cwd=str(build_temp),
+        )
 
 
 def main():
@@ -89,12 +92,12 @@ def main():
         name="uniramp",
         version="0.0",
         packages=[
-            'uniramp',
+            "uniramp",
         ],
         ext_modules=[CMakeExtension("uniramp._uniramp")],
-        cmdclass={'build_ext': cmake_build_ext},
+        cmdclass={"build_ext": cmake_build_ext},
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
