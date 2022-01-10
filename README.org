@@ -95,7 +95,7 @@ options:
 *** CJK 
 + Noto Serif CJK TC Regular (思源宋體)
 #+html:   <img src="assets/noto_serif_cjk_tc_ramp_black.png" alt="noto_serif_cjk_tc_ramp_black.png" />
-+ Noto Sans CJK TC Regular (思源黑體) [[file:assets/noto_sans_cjk_tc_ramp_black.png]]
++ Noto Sans CJK TC Regular (思源黑體)
 #+html:   <img src="assets/noto_sans_cjk_tc_ramp_black.png" alt="noto_sans_cjk_tc_ramp_black.png" />
 
 ** Ramp Bar Graph 
