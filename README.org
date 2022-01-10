@@ -6,7 +6,7 @@
   + "Standard" character ramp: ~$@B%8&WM*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^`'.~
   + Support /unicode/ character ramp information
 + Uniramp also provides the image-to-text script as a test ground
-  + An <del>ASCII</del> "Unicode" art generator
+  + An @@html:<del>@@ASCII@@html:</del>@@  "Unicode" art generator
 
 
 ** Background  
