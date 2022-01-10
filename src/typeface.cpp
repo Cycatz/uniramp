@@ -97,8 +97,13 @@ double Typeface::get_coverage(FT_ULong charcode)
         height = (m_face->ascender - m_face->descender) * m_char_pixel_size /
                  m_face->units_per_EM;
     } else {
-        assert(height == ((m_face->ascender - m_face->descender) *
-                          m_char_pixel_size / m_face->units_per_EM));
+        // Not always true
+        // assert(height == ((m_face->ascender - m_face->descender) *
+        //                   m_char_pixel_size / m_face->units_per_EM));
+
+        /* Don't use the height in vertical metrics */  
+        height = (m_face->ascender - m_face->descender) * m_char_pixel_size /
+                 m_face->units_per_EM;
     }
 
     return calculate_coverage(&m_face->glyph->bitmap, width * height);
