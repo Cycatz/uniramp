@@ -21,15 +21,29 @@
 
 ** Installation 
 Install required packages:
+
+Ubuntu 20.04:
 #+begin_src sh
-pip3 install black pytest flake8 Pillow
-#+end_src
+apt install git \
+            cmake \
+            g++ \
+            python3-dev \
+            pybind11-dev \
+            libfreetype-dev \
+            python3-distutils \
+            python3-pil
+#+end_src sh
 
 Clone the repo and build it:
 #+begin_src sh
 git clone https://github.com/Cycatz-nycu/uniramp
 cd uniramp
 make
+#+end_src
+
+Run it with the example font:  
+#+begin_src sh
+python3 -m uniramp ramp -f tests/NotoSansCJK-Regular.ttc
 #+end_src
 
 ** Usage
