@@ -1,6 +1,108 @@
 * Uniramp 
-** Ramp 
-#+html:   <img src="assets/example_cjk_ramp.png" alt="example_cjk_ramp.png" width="600" />
+
+** Introduction 
++ Uniramp ~=~ /Unicode/ ~+~ /Ramp/
+  + /Ramp/: A char sequence for representing levels of gray values
+  + "Standard" character ramp: ~$@B%8&WM*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^`'.~
+  + Support /unicode/ character ramp information
++ Uniramp also provides the image-to-text script as a test ground
+  + An <del>ASCII</del> "Unicode" art generator
+
+
+** Background  
++ Most of image-to-text tools do not support custom charset
+  + Either unicode characters, e.g., CJK characters
++ Also, the ramp lacks font information
+  + A single character have different shapes over various fonts
+
+** Program Flow 
+#+html:   <img src="assets/flowchart.png" alt="flowchart.png" />
+
+
+** Installation 
+Install required packages:
+#+begin_src sh
+pip3 install black pytest flake8 Pillow
+#+end_src
+
+Clone the repo and build it:
+#+begin_src sh
+git clone https://github.com/Cycatz-nycu/uniramp
+cd uniramp
+make
+#+end_src
+
+** Usage
+Prefix arguments with ~python -m uniramp~ to use the program:    
+#+begin_src sh
+python -m uniramp -h 
+#+end_src
+
+#+begin_src
+usage: __main__.py [-h] {ramp,image} ...
+
+positional arguments:
+  {ramp,image}
+    ramp        Print ramp infomation
+    image       Convert an image to chars
+
+options:
+  -h, --help    show this help message and exit
+#+end_src
+
+*** Ramp 
+~python -m uniramp ramp --help~:
+#+begin_src
+usage: __main__.py ramp [-h] -f FONT [-c CHARACTER_SET] [-g] [-w WIDTH]
+
+options:
+  -h, --help            show this help message and exit
+  -f FONT, --font FONT  specify the font file
+  -c CHARACTER_SET, --character-set CHARACTER_SET
+                        specify the character set (default is [a-z][A-Z])
+  -g, --graph           Print ramp graph
+  -w WIDTH, --width WIDTH
+                        specify the ramp bar width (default is 160 half-width characters)
+#+end_src
+*** Image 
+~python -m uniramp image --help~:
+#+begin_src 
+usage: __main__.py image [-h] -i IMAGE -f FONT [-c CHARACTER_SET] [-r] [-w WIDTH] [-o OUTFILE]
+
+options:
+  -h, --help            show this help message and exit
+  -i IMAGE, --image IMAGE
+                        specify the image
+  -f FONT, --font FONT  specify the font file
+  -c CHARACTER_SET, --character-set CHARACTER_SET
+                        specify the character set (default is [a-z][A-Z])
+  -r, --reverse         reverse the ramp order
+  -w WIDTH, --width WIDTH
+                        specify the generated image width (default is 80 characters)
+  -o OUTFILE, --outfile OUTFILE
+                        specify the output file (default the generated image will be printed to stdout)
+#+end_src
+* Screenshot
+
+** Ramp
+*** ASCII 
++ Inconsolata Regular: 
+#+html:   <img src="assets/Inconsolata_ramp_black.png" alt="Inconsolata_ramp_black.png" />
++ Source Code Pro Regular:
+#+html:   <img src="assets/source_code_pro_ramp_black.png" alt="source_code_pro_ramp_black.png" />
++ Fira Code Regular:
+#+html:   <img src="assets/fira_code_ramp_black.png" alt="fira_code_ramp_black.png" />
+*** CJK 
++ Noto Serif CJK TC Regular (思源宋體)
+#+html:   <img src="assets/noto_serif_cjk_tc_ramp_black.png" alt="noto_serif_cjk_tc_ramp_black.png" />
++ Noto Sans CJK TC Regular (思源黑體) [[file:assets/noto_sans_cjk_tc_ramp_black.png]]
+#+html:   <img src="assets/noto_sans_cjk_tc_ramp_black.png" alt="noto_sans_cjk_tc_ramp_black.png" />
+
+** Ramp Bar Graph 
+#+html:   <img src="assets/noto_sans_cjk_ramp_graph.png" alt="noto_sans_cjk_ramp_graph.png" />
+
 ** Image to Text
-#+html:   <img src="assets/octocat.png" alt="octocat.png" />
-#+html:   <img src="assets/example_cjk_octocat.png" alt="example_cjk_octocat.png" />
+*** Mona Lisa 
+#+html:   <img src="assets/monalisa_image_to_text_comparasion.png" alt="monalisa_image_to_text_comparasion.png" />
+*** Octocat
+#+html:   <img src="assets/octocat_image_to_text_comparasion_4.png" alt="octocat_image_to_text_comparasion_4.png" />
