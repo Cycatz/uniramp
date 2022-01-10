@@ -106,3 +106,9 @@ options:
 #+html:   <img src="assets/monalisa_image_to_text_comparasion.png" alt="monalisa_image_to_text_comparasion.png" />
 *** Octocat
 #+html:   <img src="assets/octocat_image_to_text_comparasion_4.png" alt="octocat_image_to_text_comparasion_4.png" />
+
+* Future Work 
++ Maximum/Minimum coverage rate analysis
++ Half-width/full-width characters mixing
++ Color support (ANSI escape sequences!)
++ Conversion from generated text art back to an image
