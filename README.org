@@ -126,3 +126,10 @@ options:
 + Half-width/full-width characters mixing
 + Color support (ANSI escape sequences!)
 + Conversion from generated text art back to an image
+
+
+* Reference 
++ http://paulbourke.net/dataformats/asciiart/
++ https://github.com/RameshAditya/asciify
++ https://github.com/LettError/coverage
++ https://github.com/7sDream/fontfor
